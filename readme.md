@@ -2,7 +2,7 @@
 ##### Simple social network REST API - using Django, DRF and PostgreSQL, Session Authentication
 
 
-Run the server and db in Docker containers + Creates an admin user via create_superuser.sh (username: admin, password: admin)
+Create an image, then Run the server and db in Docker containers + Creates an admin user via create_superuser.sh (username: admin, password: admin)
 ```
 docker-compose build
 docker-compose up
