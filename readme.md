@@ -2,7 +2,7 @@
 ##### Simple social network - using Django, DRF and PostgreSQL, Session Authentication
 
 
-Create an image, then Run the server and db in Docker containers + Creates an admin user via create_superuser.sh (username: admin, password: admin)
+Build an image if necessary, then Run the server and db in Docker containers + Auto Creates an admin user via create_superuser.sh (username: admin, password: admin)
 ```
 docker-compose build
 docker-compose up
