@@ -1,0 +1,1 @@
+echo "from create_superuser import create; print(create())" | python manage.py shell

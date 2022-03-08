@@ -1,0 +1,27 @@
+version: "3.6"
+
+services:
+  pgdb:
+    image: postgres
+    restart: always
+    volumes:
+      - pgdata:/var/lib/postgresql/data/
+    ports:
+      - 5432:5432
+    environment:
+      - POSTGRES_DB=postgres
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=postgres
+  app:
+    build: https://github.com/thczzz/social_network.git
+    command: >
+      bash -c "python manage.py makemigrations &&
+               python manage.py migrate &&
+               source create_superuser.sh &&
+               python manage.py runserver 0.0.0.0:8000"
+    ports:
+      - "8000:8000"
+    depends_on:
+      - pgdb
+volumes:
+  pgdata:
