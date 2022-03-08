@@ -1,5 +1,5 @@
 ## social_network - REST api
-##### Simple social network REST API - using Django, DRF and PostgreSQL, Session Authentication
+##### Simple social network - using Django, DRF and PostgreSQL, Session Authentication
 
 
 Create an image, then Run the server and db in Docker containers + Creates an admin user via create_superuser.sh (username: admin, password: admin)
