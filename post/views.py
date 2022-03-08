@@ -77,6 +77,7 @@ class PostCommentView(generics.CreateAPIView):
                 comment=comment
             )
             return Response('Comment posted', status=status.HTTP_201_CREATED)
+        return Response(status=status.HTTP_400_BAD_REQUEST)
 
 
 class PostsWallView(generics.RetrieveAPIView, LimitOffsetPagination):
