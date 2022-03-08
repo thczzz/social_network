@@ -82,6 +82,7 @@ class PostCommentView(generics.CreateAPIView):
 class PostsWallView(generics.RetrieveAPIView, LimitOffsetPagination):
     serializer_class = serializers.PostSerializer
     queryset = models.Post.objects.all()
+    permission_classes = [permissions.IsAuthenticated]
 
     def retrieve(self, request, *args, **kwargs):
 
