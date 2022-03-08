@@ -34,9 +34,9 @@ api/user/friends/<int:user_id>/
 **Get user's friends, by providing "user_id": int. (login required, GET only) 
 
 ```
-api/user/send-friend-request/
+api/user/send-friend-request/<int:to_user>/
 ```
-**Sends a friend request to another user, by providing a "to_user": id. (login required, POST only)
+**Sends a friend request to another user, by providing a "to_user": int. (login required, POST only)
 ```
 api/user/friend-requests/
 ```
