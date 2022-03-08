@@ -4,8 +4,10 @@
 
 Run the server and db in Docker containers + Creates an admin user via create_superuser.sh (username: admin, password: admin)
 ```
+docker-compose build
 docker-compose up
   --OR--
+docker-compose -f <path/to/docker-compose.yml> build
 docker-compose -f <path/to/docker-compose.yml> up
 ```
 
