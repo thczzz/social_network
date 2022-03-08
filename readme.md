@@ -1,11 +1,13 @@
 ## social_network - REST api
-##### Simple social network REST API - using Django, DRF and PostgreSQL, Session Authentication
+##### Simple social network - using Django, DRF and PostgreSQL, Session Authentication
 
 
-Run the server and db in Docker containers + Creates an admin user via create_superuser.sh (username: admin, password: admin)
+Create an image, then Run the server and db in Docker containers + Creates an admin user via create_superuser.sh (username: admin, password: admin)
 ```
+docker-compose build
 docker-compose up
   --OR--
+docker-compose -f <path/to/docker-compose.yml> build
 docker-compose -f <path/to/docker-compose.yml> up
 ```
 
@@ -34,9 +36,9 @@ api/user/friends/<int:user_id>/
 **Get user's friends, by providing "user_id": int. (login required, GET only) 
 
 ```
-api/user/send-friend-request/
+api/user/send-friend-request/<int:to_user>/
 ```
-**Sends a friend request to another user, by providing a "to_user": id. (login required, POST only)
+**Sends a friend request to another user, by providing a "to_user": int. (login required, POST only)
 ```
 api/user/friend-requests/
 ```
