@@ -43,5 +43,8 @@ class PostComment(postcommon):
     post = models.ForeignKey(Post, on_delete=models.CASCADE, related_name='post_comments')
     comment = models.TextField(max_length=300)
 
+    class Meta:
+        ordering = ('-created_at',)
+
     def __str__(self):
         return f"{self.comment[:30]}... by {self.user.username}"

@@ -90,9 +90,12 @@ class PostsWallView(generics.RetrieveAPIView, LimitOffsetPagination):
     def retrieve(self, request, *args, **kwargs):
         # time_now = datetime.datetime.now(timezone.utc)
         # time_threshold = datetime.datetime.now(timezone.utc) - datetime.timedelta(hours=3)
-        time_threshold = datetime.datetime.now(timezone.utc) - datetime.timedelta(minutes=10)
+        time_threshold = datetime.datetime.now(timezone.utc) - datetime.timedelta(minutes=30)
 
         """ 
+            if posts were NOT made in the last 10 minutes => order_by created_at, likes_count desc
+            else: order_by comments_count desc, likes_count desc
+        
             14 queries in ~25.00ms, 18 posts
         """
         """
