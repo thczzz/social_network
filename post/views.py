@@ -93,7 +93,7 @@ class PostsWallView(generics.RetrieveAPIView, LimitOffsetPagination):
         time_threshold = datetime.datetime.now(timezone.utc) - datetime.timedelta(minutes=10)
 
         """ 
-            if posts were NOT made in the last 10 minutes => order_by created_at, likes_count desc
+            if post was NOT made in the last 10 minutes => order_by created_at, likes_count desc
             else: order_by comments_count desc, likes_count desc
         
             14 queries in ~25.00ms, 18 posts
