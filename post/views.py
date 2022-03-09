@@ -1,5 +1,7 @@
+import datetime
 from django.db import IntegrityError
-from django.db.models import Count
+from django.db.models import Count, ExpressionWrapper, BooleanField, Q, Case, When
+from django.utils import timezone
 from rest_framework.response import Response
 from post import serializers, models
 from rest_framework import permissions, generics, status
@@ -86,10 +88,29 @@ class PostsWallView(generics.RetrieveAPIView, LimitOffsetPagination):
     permission_classes = [permissions.IsAuthenticated]
 
     def retrieve(self, request, *args, **kwargs):
+        # time_now = datetime.datetime.now(timezone.utc)
+        # time_threshold = datetime.datetime.now(timezone.utc) - datetime.timedelta(hours=3)
+        time_threshold = datetime.datetime.now(timezone.utc) - datetime.timedelta(minutes=10)
 
-        queryset = models.Post.objects.prefetch_related('likes', 'comments').filter(
+        """ 
+            14 queries in ~25.00ms, 18 posts
+        """
+        """
+        Note:
+            # SELECT * FROM "user_user" WHERE "user_user"."id" = 1 LIMIT 21
+            # 7 similar queries. Duplicated 6 times. 
+        """
+        queryset = models.Post.objects.prefetch_related('likes', 'comments', 'creator', 'post_comments').filter(
             creator__in=request.user.friends.all()).annotate(likes_count=Count('likes')).annotate(
-            comments_count=Count('comments')).order_by('-created_at', '-comments_count', '-likes_count')
+            comments_count=Count('comments')).annotate(
+            is_recent=ExpressionWrapper(
+                Q(created_at__gte=time_threshold), output_field=BooleanField()
+            )
+        ).order_by(
+                Case(When(is_recent=False, then='created_at')).desc(),
+                Case(When(is_recent=True, then='comments_count')).desc(),
+                '-likes_count',
+        )
 
         results = self.paginate_queryset(queryset)
         serializer = serializers.PostSerializer(results, many=True, context={"request": request})

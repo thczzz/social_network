@@ -1,4 +1,8 @@
+import datetime
+
 from django.db import models
+from django.utils import timezone
+
 from user.models import User
 from django.utils.timesince import timesince
 

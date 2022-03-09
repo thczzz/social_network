@@ -32,6 +32,7 @@ INSTALLED_APPS = [
     'rest_framework',
 ]
 
+
 AUTH_USER_MODEL = 'user.User'
 LOGIN_REDIRECT_URL = 'post:wall'
 
