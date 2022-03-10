@@ -57,7 +57,7 @@ api/posts/add/
 ```
 api/posts/wall/
 ```
-**Returns posts by user's friends, newest first. (login required, GET only)
+**Returns posts by user's friends, Recent Posts first(made in the last 10 minutes) ordered by num_of_comments desc, num_of_likes desc, the rest are ordered by created_at desc, num_of_likes desc (login required, GET only)
 
 ```
 api/posts/view/<int:user_id>/
